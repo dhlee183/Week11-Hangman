@@ -9,9 +9,9 @@ prompt.start();
 
 var hangManGame = {
 	wordBank : game // create or import a list of words
-	wordsWon : 0, // count of words Found
+	wordsWon : 0 // count of words Found
 	guessesRemaining : 10, //per word
-	currentWrd : null, //the word object
+	currentWrd : null //the word object
 
 	startGame : function (wrd){
 		//make sure the user has 10 guesses
@@ -48,22 +48,26 @@ var hangManGame = {
 		    if (letterCheck == 0) {
 		    	self.guessesRemaining--;
 		    	console.log("Incorrect letter");
-		    }		
-
-			// check if you win only when you are right
-        	// end game
-			 
-		    // display the user how many guesses remaining
-			
-			// render the word 
-				
-			// display letters the user has guessed
-
-			// if user has remaining guesses and Word isn't found
-			
-			// if user has no guesses left, show them the word and tell them they lost
-			
-			// else show the user word and rendered
+		    }
+		   	else {
+ 				console.log("Correct");
+ 					if(self.currentWrd.didWeFindTheWord()) {
+ 						console.log("The word is : " + self.currentWrd.wordRender());
+ 						wordsWon++
+ 						return;
+ 					}
+ 			}
+ 			console.log("Word: "+ self.currentWrd.wordRender());
+ 			
+ 			console.log("Guesses remaining: " + self.guessesRemaining);
+ 			if((self.guessesRemaining > 0) && (self.currentWrd.found == false)){
+ 				self.keepPromptingUser();
+ 			}
+ 			else if(self.guessesRemaining == 0){
+ 				console.log("[Game over] Correct Word : ", self.currentWrd.wrd);
+ 			} else {
+ 				console.log(self.currentWrd.wordRender());
+ 			}		
 		    
 		});
 	}
